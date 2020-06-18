@@ -7,6 +7,10 @@ module.exports = {
         rootPathSuffix: 'src',
       },
     ],
-    ['transform-remove-console'],
   ],
+  env: {
+    production: {
+      plugins: ['transform-remove-console'],
+    },
+  },
 };

@@ -17,13 +17,7 @@ function Counter({ onIncrement, onDecrement, value }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  console.log('state', state);
-
-  return {
-    value: state.counter.value,
-  };
-};
+const mapStateToProps = ({ counter }) => ({ value: counter });
 
 const mapDispatch = { onIncrement: increment, onDecrement: decrement };
 
