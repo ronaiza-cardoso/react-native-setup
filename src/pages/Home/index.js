@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from './styles';
 
 import Button from '~/components/Button';
+import Counter from '~/components/Counter';
 
 function Home({ navigation }) {
   return (
@@ -15,6 +16,8 @@ function Home({ navigation }) {
         text="OPEN MODAL"
         onPress={() => navigation.navigate('MyModal')}
       />
+
+      <Counter />
     </Container>
   );
 }

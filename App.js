@@ -3,6 +3,10 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { Provider } from 'react-redux';
+
+import store from '~/store';
+
 import Home from '~/pages/Home';
 import Profile from '~/pages/Profile';
 import Modal from '~/pages/Modal';
@@ -34,9 +38,11 @@ function RootStackScreen() {
 
 function App() {
   return (
-    <NavigationContainer>
-      <RootStackScreen />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <RootStackScreen />
+      </NavigationContainer>
+    </Provider>
   );
 }
 
