@@ -2,45 +2,52 @@ import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 import { Provider } from 'react-redux';
 
 import store from '~/store';
 
-import Home from '~/pages/Home';
-import Profile from '~/pages/Profile';
-import Modal from '~/pages/Modal';
+// ---- Drawer Screens
+import Contacts from '~/screens/drawers/Contacts';
+import Favorites from '~/screens/drawers/Favorites';
+import Settings from '~/screens/drawers/Settings';
 
-const MainStack = createStackNavigator();
-const RootStack = createStackNavigator();
+// ---- Tabs Screens
+import Tab1 from '~/screens/tabs/Tab1';
+import Tab2 from '~/screens/tabs/Tab2';
+import Tab3 from '~/screens/tabs/Tab3';
 
-function MainStackScreen() {
-  return (
-    <MainStack.Navigator>
-      <MainStack.Screen name="Home" component={Home} />
-      <MainStack.Screen name="Profile" component={Profile} />
-    </MainStack.Navigator>
-  );
-}
+// --- Main Pages
+import Detail from '~/pages/Detail';
+import Feed from '~/pages/Feed';
 
-function RootStackScreen() {
-  return (
-    <RootStack.Navigator mode="modal">
-      <RootStack.Screen
-        name="Main"
-        component={MainStackScreen}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen name="MyModal" component={Modal} />
-    </RootStack.Navigator>
-  );
-}
+const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
+const MaterialBottomTabs = createMaterialTopTabNavigator();
+const MaterialTopTabs = createBottomTabNavigator();
 
 function App() {
+  function CreateHomeStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Feed" component={Feed} />
+        <Stack.Screen name="Detail" component={Detail} />
+      </Stack.Navigator>
+    );
+  }
+
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <RootStackScreen />
+        <Drawer.Navigator>
+          <Drawer.Screen name="Home" component={CreateHomeStack} />
+          <Drawer.Screen name="Contacts" component={Contacts} />
+          <Drawer.Screen name="Favorites" component={Favorites} />
+          <Drawer.Screen name="Settings" component={Settings} />
+        </Drawer.Navigator>
       </NavigationContainer>
     </Provider>
   );
