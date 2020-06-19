@@ -33,9 +33,53 @@ function App() {
   function CreateHomeStack() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Feed" component={Feed} />
+        <Stack.Screen
+          name="Feed"
+          options={{
+            headerStyle: {
+              backgroundColor: '#333',
+            },
+            headerTintColor: '#eee',
+          }}
+          component={Feed}
+        />
         <Stack.Screen name="Detail" component={Detail} />
+
+        <Stack.Screen name="BottomTabs" children={CreateBottomTabs} />
+        <Stack.Screen name="TopTabs" children={CreateTopTabs} />
       </Stack.Navigator>
+    );
+  }
+
+  function CreateTopTabs() {
+    return (
+      <MaterialTopTabs.Navigator>
+        <MaterialTopTabs.Screen name="Tab1" component={Tab1} />
+        <MaterialTopTabs.Screen name="Tab2" component={Tab2} />
+        <MaterialTopTabs.Screen name="Tab3" component={Tab3} />
+      </MaterialTopTabs.Navigator>
+    );
+  }
+
+  function CreateBottomTabs() {
+    return (
+      <MaterialBottomTabs.Navigator>
+        <MaterialBottomTabs.Screen
+          options={{ title: 'Tab 1' }}
+          name="Tab1"
+          component={Tab1}
+        />
+        <MaterialBottomTabs.Screen
+          options={{ title: 'Tab 2' }}
+          name="Tab2"
+          component={Tab2}
+        />
+        <MaterialBottomTabs.Screen
+          options={{ title: 'Tab 3 ' }}
+          name="Tab3"
+          component={Tab3}
+        />
+      </MaterialBottomTabs.Navigator>
     );
   }
 
@@ -43,7 +87,7 @@ function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Drawer.Navigator>
-          <Drawer.Screen name="Home" component={CreateHomeStack} />
+          <Drawer.Screen name="Home" children={CreateHomeStack} />
           <Drawer.Screen name="Contacts" component={Contacts} />
           <Drawer.Screen name="Favorites" component={Favorites} />
           <Drawer.Screen name="Settings" component={Settings} />

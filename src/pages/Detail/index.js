@@ -11,12 +11,19 @@ function Detail({ navigation }) {
 
       <Button
         text="View Bottom Tabs"
-        onPress={() => navigation.navigate('Profile')}
+        onPress={() => navigation.navigate('BottomTabs')}
       />
 
       <Button
         text="View Top Tabs"
-        onPress={() => navigation.navigate('Profile')}
+        onPress={() => navigation.navigate('TopTabs')}
+      />
+
+      <Button
+        text="Pass Data Back"
+        onPress={() =>
+          navigation.navigate('Feed', { data: 'Hello from detail' })
+        }
       />
     </Container>
   );
