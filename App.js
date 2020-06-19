@@ -46,15 +46,12 @@ function App() {
           options={({ navigation }) => ({
             title: 'React Navigation',
             headerLeft: () => (
-              // <Icon
-              //   onPress={() =>
-              //     navigation.dispatch(DrawerActions.toggleDrawer())
-              //   }
-              //   style={[{ color: 'white', marginLeft: 8 }]}
-              //   size={24}
-              //   name={'menu'}
-              // />
-              <Text />
+              <Text
+                onPress={() =>
+                  navigation.dispatch(DrawerActions.toggleDrawer())
+                }>
+                menu
+              </Text>
             ),
             headerStyle: {
               backgroundColor: '#333',
@@ -105,14 +102,12 @@ function App() {
 
   const colorScheme = useColorScheme();
 
-  console.log('colorScheme -->', colorScheme);
-
   const MyTheme = {
     dark: false,
     colors: {
-      primary: 'white',
-      background: 'white',
-      card: '#eee',
+      primary: 'red',
+      background: '#333',
+      card: '#333',
       text: 'white',
       border: 'green',
     },
