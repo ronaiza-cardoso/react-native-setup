@@ -1,10 +1,18 @@
 import * as React from 'react';
 
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme,
+  DrawerActions,
+} from '@react-navigation/native';
+import { Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useColorScheme, AppearanceProvider } from 'react-native-appearance';
 
 import { Provider } from 'react-redux';
 
@@ -35,12 +43,24 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen
           name="Feed"
-          options={{
+          options={({ navigation }) => ({
+            title: 'React Navigation',
+            headerLeft: () => (
+              // <Icon
+              //   onPress={() =>
+              //     navigation.dispatch(DrawerActions.toggleDrawer())
+              //   }
+              //   style={[{ color: 'white', marginLeft: 8 }]}
+              //   size={24}
+              //   name={'menu'}
+              // />
+              <Text />
+            ),
             headerStyle: {
               backgroundColor: '#333',
             },
             headerTintColor: '#eee',
-          }}
+          })}
           component={Feed}
         />
         <Stack.Screen name="Detail" component={Detail} />
@@ -83,17 +103,35 @@ function App() {
     );
   }
 
+  const colorScheme = useColorScheme();
+
+  console.log('colorScheme -->', colorScheme);
+
+  const MyTheme = {
+    dark: false,
+    colors: {
+      primary: 'white',
+      background: 'white',
+      card: '#eee',
+      text: 'white',
+      border: 'green',
+    },
+  };
+
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Drawer.Navigator>
-          <Drawer.Screen name="Home" children={CreateHomeStack} />
-          <Drawer.Screen name="Contacts" component={Contacts} />
-          <Drawer.Screen name="Favorites" component={Favorites} />
-          <Drawer.Screen name="Settings" component={Settings} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <AppearanceProvider>
+      <Provider store={store}>
+        <NavigationContainer
+          theme={colorScheme === 'dark' ? DarkTheme : MyTheme}>
+          <Drawer.Navigator>
+            <Drawer.Screen name="Home" children={CreateHomeStack} />
+            <Drawer.Screen name="Contacts" component={Contacts} />
+            <Drawer.Screen name="Favorites" component={Favorites} />
+            <Drawer.Screen name="Settings" component={Settings} />
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </Provider>
+    </AppearanceProvider>
   );
 }
 
