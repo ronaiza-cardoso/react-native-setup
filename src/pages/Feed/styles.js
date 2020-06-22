@@ -11,3 +11,10 @@ export const Title = styled.Text`
   font-weight: bold;
   color: #fff;
 `;
+
+export const SubTitle = styled.Text`
+  font-size: 20px;
+  padding: 16px 0;
+  font-weight: bold;
+  color: #fff;
+`;

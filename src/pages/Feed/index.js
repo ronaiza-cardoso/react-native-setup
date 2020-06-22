@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NativeModules } from 'react-native';
-import { Container, Title } from './styles';
 
 import Button from '~/components/Button';
+import { Container, Title, SubTitle } from './styles';
 
 const { Device } = NativeModules;
 
 function Feed({ navigation, route }) {
+  const [deviceName, setDeviceName] = useState();
   useEffect(() => {
     if (route.params?.data) {
       console.log('route', route);
@@ -17,14 +18,16 @@ function Feed({ navigation, route }) {
 
   function getDeviceName() {
     Device.getDeviceName((err, name) =>
-      err ? console.error('err: ', err) : console.log('Device name:', name),
+      err ? console.error('err: ', err) : setDeviceName(name),
     );
   }
+
+  console.log('euuu');
 
   return (
     <Container>
       <Title>Navigation Drawer</Title>
-      <Title />
+      <SubTitle>{deviceName}</SubTitle>
 
       <Button
         text="Go to feed item"

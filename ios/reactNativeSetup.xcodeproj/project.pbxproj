@@ -18,6 +18,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* reactNativeSetupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* reactNativeSetupTests.m */; };
 		463F14ECC5B586F13FB91DC3 /* libPods-reactNativeSetup-reactNativeSetupTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88F30A737EB18D051178A1BF /* libPods-reactNativeSetup-reactNativeSetupTests.a */; };
 		5002F82A95DB83A0740121C5 /* libPods-reactNativeSetup-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CF66CD028F0C25D217171E /* libPods-reactNativeSetup-tvOSTests.a */; };
+		52F9861924A0F602004967FE /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F9861824A0F602004967FE /* Device.m */; };
 		8C12C8F49B0CE4E70A2F782A /* libPods-reactNativeSetup.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63161A51917913B393E93C68 /* libPods-reactNativeSetup.a */; };
 		B60776A74741DEAC129BA464 /* libPods-reactNativeSetup-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF3E23BBD41A0CC83A05F70 /* libPods-reactNativeSetup-tvOS.a */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,8 @@
 		358E8511987B41C6B8747F83 /* Pods-reactNativeSetup-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactNativeSetup-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-reactNativeSetup-tvOSTests/Pods-reactNativeSetup-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		36CF66CD028F0C25D217171E /* libPods-reactNativeSetup-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reactNativeSetup-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B0A0DE8C622CDF46BF8C3B5 /* Pods-reactNativeSetup-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactNativeSetup-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-reactNativeSetup-tvOSTests/Pods-reactNativeSetup-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		52F9861724A0F5BF004967FE /* Device.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		52F9861824A0F602004967FE /* Device.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		62B4DEE7FA5458FE2CE59025 /* Pods-reactNativeSetup-reactNativeSetupTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reactNativeSetup-reactNativeSetupTests.release.xcconfig"; path = "Target Support Files/Pods-reactNativeSetup-reactNativeSetupTests/Pods-reactNativeSetup-reactNativeSetupTests.release.xcconfig"; sourceTree = "<group>"; };
 		63161A51917913B393E93C68 /* libPods-reactNativeSetup.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reactNativeSetup.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F30A737EB18D051178A1BF /* libPods-reactNativeSetup-reactNativeSetupTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reactNativeSetup-reactNativeSetupTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +135,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				52F9861724A0F5BF004967FE /* Device.h */,
+				52F9861824A0F602004967FE /* Device.m */,
 			);
 			name = reactNativeSetup;
 			sourceTree = "<group>";
@@ -161,7 +166,6 @@
 				4B0A0DE8C622CDF46BF8C3B5 /* Pods-reactNativeSetup-tvOSTests.debug.xcconfig */,
 				358E8511987B41C6B8747F83 /* Pods-reactNativeSetup-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -530,6 +534,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52F9861924A0F602004967FE /* Device.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
