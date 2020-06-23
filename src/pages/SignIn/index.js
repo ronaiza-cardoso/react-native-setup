@@ -1,6 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
@@ -125,76 +130,91 @@ function SignIn({ navigation }) {
   });
 
   return (
-    <Container>
-      <ImageContainer
-        as={Animated.View}
+    <KeyboardAvoidingView
+      style={{ flex: 1, backgroundColor: 'white', justifyContent: 'flex-end' }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      enabled>
+      <Container
         style={{
-          ...StyleSheet.absoluteFill,
-          transform: [{ translateY: bgY }],
-        }}>
-        <Svg {...{ height: height + 20, width }}>
-          <ClipPath id="clip">
-            <Circle r={height + 20} cx={width / 2} />
-          </ClipPath>
-          <Image
-            href={require('../../assets/waves.jpg')}
-            preserveAspectRatio="xMidyMid slice"
-            clipPath="url(#clip)"
-            {...{ height: height + 20, width }}
-          />
-        </Svg>
-      </ImageContainer>
+          flex: 1,
+          backgroundColor: 'white',
+          justifyContent: 'flex-end',
+        }}
+        behavior="padding"
+        enabled>
+        <ImageContainer
+          as={Animated.View}
+          style={{
+            ...StyleSheet.absoluteFill,
+            transform: [{ translateY: bgY }],
+          }}>
+          <Svg {...{ height: height + 20, width }}>
+            <ClipPath id="clip">
+              <Circle r={height + 20} cx={width / 2} />
+            </ClipPath>
+            <Image
+              href={require('../../assets/waves.jpg')}
+              preserveAspectRatio="xMidyMid slice"
+              clipPath="url(#clip)"
+              {...{ height: height + 20, width }}
+            />
+          </Svg>
+        </ImageContainer>
 
-      <LoginContainer style={{ height: height / 3 }}>
-        <TapGestureHandler onHandlerStateChange={onStateChange}>
+        <LoginContainer style={{ height: height / 3 }}>
+          <TapGestureHandler onHandlerStateChange={onStateChange}>
+            <ButtonContainer
+              as={Animated.View}
+              styles={{
+                opacity: buttonOpacity,
+                transform: [{ translateY: buttonY }],
+              }}>
+              <Button
+                as={Animated.Text}
+                style={{ color: '#333', opacity: buttonOpacity }}>
+                SIGN IN
+              </Button>
+            </ButtonContainer>
+          </TapGestureHandler>
           <ButtonContainer
             as={Animated.View}
-            styles={{
+            style={{
+              backgroundColor: '#2E71DC',
               opacity: buttonOpacity,
               transform: [{ translateY: buttonY }],
             }}>
-            <Button
-              as={Animated.Text}
-              style={{ color: '#333', opacity: buttonOpacity }}>
-              SIGN IN
-            </Button>
+            <Button style={{ color: 'white' }}>SIGN IN WITH FACEBOOK</Button>
           </ButtonContainer>
-        </TapGestureHandler>
-        <ButtonContainer
+        </LoginContainer>
+
+        <InputContainer
           as={Animated.View}
           style={{
-            backgroundColor: '#2E71DC',
-            opacity: buttonOpacity,
-            transform: [{ translateY: buttonY }],
+            height: height / 3,
+            ...StyleSheet.absoluteFill,
+            top: null,
+            zIndex: textInputZIndex,
+            opacity: textInputOpacity,
+            transform: [{ translateY: textInputY }],
+            backgroundColor: '#fff',
+            borderTopLeftRadius: 40,
+            borderTopRightRadius: 40,
           }}>
-          <Button style={{ color: 'white' }}>SIGN IN WITH FACEBOOK</Button>
-        </ButtonContainer>
-      </LoginContainer>
+          <TapGestureHandler onHandlerStateChange={onCloseState}>
+            <CloseContainer as={Animated.View}>
+              <CloseButton>X</CloseButton>
+            </CloseContainer>
+          </TapGestureHandler>
 
-      <InputContainer
-        as={Animated.View}
-        style={{
-          height: height / 3,
-          ...StyleSheet.absoluteFill,
-          top: null,
-          zIndex: textInputZIndex,
-          opacity: textInputOpacity,
-          transform: [{ translateY: textInputY }],
-        }}>
-        <TapGestureHandler onHandlerStateChange={onCloseState}>
-          <CloseContainer as={Animated.View}>
-            <CloseButton>X</CloseButton>
-          </CloseContainer>
-        </TapGestureHandler>
+          <TextInput placeholder="EMAIL" />
+          <TextInput placeholder="PASSWORD" />
 
-        <TextInput placeholder="EMAIL" />
-        <TextInput placeholder="PASSWORD" />
-
-        <ButtonContainer as={Animated.View}>
-          <Button style={{ color: '#333' }}>SIGN IN</Button>
-        </ButtonContainer>
-      </InputContainer>
-    </Container>
+          <ButtonContainer as={Animated.View}>
+            <Button style={{ color: '#333' }}>SIGN IN</Button>
+          </ButtonContainer>
+        </InputContainer>
+      </Container>
+    </KeyboardAvoidingView>
   );
 }
 
