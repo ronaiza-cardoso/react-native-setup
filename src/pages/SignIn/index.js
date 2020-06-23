@@ -4,6 +4,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
+import Svg, { Image, Circle, ClipPath } from 'react-native-svg';
 
 const {
   Value,
@@ -25,10 +26,13 @@ const {
 import {
   Container,
   ImageContainer,
-  Image,
   LoginContainer,
   ButtonContainer,
   Button,
+  InputContainer,
+  TextInput,
+  CloseContainer,
+  CloseButton,
 } from './styles';
 
 const { width, height } = Dimensions.get('window');
@@ -77,6 +81,18 @@ function SignIn({ navigation }) {
     },
   ]);
 
+  const onCloseState = event([
+    {
+      nativeEvent: ({ state }) =>
+        block([
+          cond(
+            eq(state, State.END),
+            set(buttonOpacity, runTiming(new Clock(), 0, 1)),
+          ),
+        ]),
+    },
+  ]);
+
   const buttonY = interpolate(buttonOpacity, {
     inputRange: [0, 1],
     outputRange: [100, 0],
@@ -85,7 +101,26 @@ function SignIn({ navigation }) {
 
   const bgY = interpolate(buttonOpacity, {
     inputRange: [0, 1],
-    outputRange: [-height / 3, 0],
+    outputRange: [-height / 3 - 20, 0],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  // input container
+  const textInputZIndex = interpolate(buttonOpacity, {
+    inputRange: [0, 1],
+    outputRange: [1, -1],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  const textInputOpacity = interpolate(buttonOpacity, {
+    inputRange: [0, 1],
+    outputRange: [1, 0],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  const textInputY = interpolate(buttonOpacity, {
+    inputRange: [0, 1],
+    outputRange: [0, 100],
     extrapolate: Extrapolate.CLAMP,
   });
 
@@ -97,10 +132,17 @@ function SignIn({ navigation }) {
           ...StyleSheet.absoluteFill,
           transform: [{ translateY: bgY }],
         }}>
-        <Image
-          source={require('../../assets/waves.jpg')}
-          style={{ flex: 1, height: null, width: null }}
-        />
+        <Svg {...{ height: height + 20, width }}>
+          <ClipPath id="clip">
+            <Circle r={height + 20} cx={width / 2} />
+          </ClipPath>
+          <Image
+            href={require('../../assets/waves.jpg')}
+            preserveAspectRatio="xMidyMid slice"
+            clipPath="url(#clip)"
+            {...{ height: height + 20, width }}
+          />
+        </Svg>
       </ImageContainer>
 
       <LoginContainer style={{ height: height / 3 }}>
@@ -128,6 +170,30 @@ function SignIn({ navigation }) {
           <Button style={{ color: 'white' }}>SIGN IN WITH FACEBOOK</Button>
         </ButtonContainer>
       </LoginContainer>
+
+      <InputContainer
+        as={Animated.View}
+        style={{
+          height: height / 3,
+          ...StyleSheet.absoluteFill,
+          top: null,
+          zIndex: textInputZIndex,
+          opacity: textInputOpacity,
+          transform: [{ translateY: textInputY }],
+        }}>
+        <TapGestureHandler onHandlerStateChange={onCloseState}>
+          <CloseContainer as={Animated.View}>
+            <CloseButton>X</CloseButton>
+          </CloseContainer>
+        </TapGestureHandler>
+
+        <TextInput placeholder="EMAIL" />
+        <TextInput placeholder="PASSWORD" />
+
+        <ButtonContainer as={Animated.View}>
+          <Button style={{ color: '#333' }}>SIGN IN</Button>
+        </ButtonContainer>
+      </InputContainer>
     </Container>
   );
 }
