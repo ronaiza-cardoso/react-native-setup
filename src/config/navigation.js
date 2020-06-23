@@ -15,6 +15,11 @@ import ActionDetails from '~/pages/ActionDetails';
 // --- Drawer ----
 import Settings from '~/pages/Settings';
 
+// --- Auth flow ----
+import SignUp from '~/pages/SignUp';
+import SignIn from '~/pages/SignIn';
+import Loading from '~/pages/Loading';
+
 const ContactsStack = createStackNavigator();
 const ContactsStackScreen = () => (
   <ContactsStack.Navigator>
@@ -61,8 +66,37 @@ const AppTabsScreen = () => (
   </AppTabs.Navigator>
 );
 
-export default () => (
-  <NavigationContainer>
-    <AppDrawerScreen />
-  </NavigationContainer>
+const AuthStack = createStackNavigator();
+const AuthStackScreen = () => (
+  <AuthStack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}>
+    <AuthStack.Screen name="SignIn" component={SignIn} />
+    <AuthStack.Screen name="SignUp" component={SignUp} />
+  </AuthStack.Navigator>
 );
+
+export default () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(!isLoading);
+      // setUser({});
+    }, 500);
+  }, []);
+
+  return (
+    <NavigationContainer>
+      {isLoading ? (
+        <Loading />
+      ) : user ? (
+        <AppDrawerScreen />
+      ) : (
+        <AuthStackScreen />
+      )}
+    </NavigationContainer>
+  );
+};
